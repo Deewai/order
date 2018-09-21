@@ -14,7 +14,18 @@ class OrderController{
 
     public function createOrder(array $origin,array $destination){
         $api = file_get_contents("https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=".$origin[0] . "," . $origin[1]."&destinations=".$destination[0] . "," . $destination[1]."&key=".api_key);
-            $data = json_decode($api);
+        $data = json_decode($api);
+        if($data->status != 'OK'){
+            return ['error' => $data->status];
+        }
+        else {
+            if($data->rows[0]->elements[0]->status == 'NOT_FOUND'){
+                return ['error' => $data->rows[0]->elements[0]->status];
+            }
+        }
+        if(!isset($data->rows[0]->elements[0]->distance)){
+            return ['error' => 'ERROR_GETTING_DISTANCE'];
+        }
         $distance = $data->rows[0]->elements[0]->distance->value;
         return $this->model->create($distance);
     }

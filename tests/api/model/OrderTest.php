@@ -41,7 +41,6 @@ class OrderTest extends TestCase
     }
 
     public function testCount(){
-        $this->assertEquals(28,$this->order->count());
         $response = $this->order->create(50);
         $result = $this->order->update($response['id']);
         $this->assertArrayHasKey('status',$result);

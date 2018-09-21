@@ -72,7 +72,7 @@ switch ($requestUri) {
         }
         break;
     // api/orders?page=:page&limit=:limit
-    case ((preg_match('/\/orders\?page\=\d+\&limit\=\d+$/', $requestUri, $matches) || preg_match('/\/orders/', $requestUri, $matches)) ? true : false):
+    case ((preg_match('/\/orders\?page\=\d+\&limit\=\d+$/', $requestUri, $matches) || ($requestUri == '/orders')) ? true : false):
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $page = isset($_GET['page']) ? $_GET['page'] : 1;
             $limit = isset($_GET['limit']) ? $_GET['limit'] : 10;
@@ -93,6 +93,7 @@ switch ($requestUri) {
         break;
     //Everything else
     default:
-        echo json_encode(['status' => '404', 'error' => 'NOT_FOUND']);
+        header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 404);
+        echo json_encode(['error' => 'NOT_FOUND']);
         break;
 }

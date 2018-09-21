@@ -25,21 +25,33 @@ class OrderControllerTest extends TestCase
     }
 
     public function testCreateOrder(){
-        $response = $this->order->createOrder(['10','15'],['20','11']);
-        $this->assertArrayHasKey('id',$response);
-        $this->assertArrayHasKey('distance',$response);
-        $this->assertArrayHasKey('status',$response);
+        $response = $this->order->createOrder(['40.6655101','15'],['20','11']);
+        if(!key_exists('error',$response)){
+            $this->assertArrayHasKey('id',$response);
+            $this->assertArrayHasKey('distance',$response);
+            $this->assertArrayHasKey('status',$response);
+        }
+        else{
+            $this->assertTrue(is_string($response['error']));
+        }
         
     }
 
     public function testTakeOrder(){
-        $response = $this->order->createOrder(['10','15'],['20','11']);
+        $response = $this->order->createOrder(['40.6655101','15'],['20','11']);
         $result = $this->order->takeOrder($response['id'],'taken');
-        $this->assertArrayHasKey('status',$result);
-        $this->assertEquals('SUCCESS',$result['status']);
+        $order_response = 'INVALID_ORDER_STATUS';
+        if(!key_exists('error',$response)){
+            $this->assertArrayHasKey('status',$result);
+            $this->assertEquals('SUCCESS',$result['status']);
+        }
+        else{
+            $order_response = 'ORDER_DOES_NOT_EXIST';
+        }
+        
         $result = $this->order->takeOrder($response['id'],'');
         $this->assertArrayHasKey('error',$result);
-        $this->assertEquals('INVALID_ORDER_STATUS',$result['error']);
+        $this->assertEquals($order_response,$result['error']);
         $result = $this->order->takeOrder('3000ff','taken');
         $this->assertArrayHasKey('error',$result);
         $this->assertEquals('ORDER_DOES_NOT_EXIST',$result['error']);
@@ -49,7 +61,7 @@ class OrderControllerTest extends TestCase
     }
 
     public function testOrderList(){
-        $response = $this->order->createOrder(['10','15'],['20','11']);
+        $response = $this->order->createOrder(['40.6655101','15'],['20','11']);
         $result = $this->order->orderList(1,5);
         $this->assertTrue(is_array($result));
     }

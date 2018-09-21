@@ -30,4 +30,4 @@ nginx:
   links:
     - php
   ports:
-    - 3128:80
+    - 8080:80
