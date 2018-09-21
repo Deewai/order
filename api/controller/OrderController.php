@@ -13,20 +13,13 @@ class OrderController{
     }
 
     public function createOrder(array $origin,array $destination){
-        $api = file_get_contents("https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=".$origin[0] . "," . $origin[1]."&destinations=".$destination[0] . "," . $destination[1]."&key=".api_key);
+        $api = file_get_contents("https://route.api.here.com/routing/7.2/calculateroute.json?app_id=".app_id."&app_code=".app_code."&waypoint0=geo!".$origin[0] . "," . $origin[1]."&waypoint1=geo!".$destination[0] . "," . $destination[1]."&mode=fastest;car;traffic:disabled");
         $data = json_decode($api);
-        if($data->status != 'OK'){
-            return ['error' => $data->status];
-        }
-        else {
-            if($data->rows[0]->elements[0]->status == 'NOT_FOUND'){
-                return ['error' => $data->rows[0]->elements[0]->status];
-            }
-        }
-        if(!isset($data->rows[0]->elements[0]->distance)){
+
+        if(!isset($data->response->route)){
             return ['error' => 'ERROR_GETTING_DISTANCE'];
         }
-        $distance = $data->rows[0]->elements[0]->distance->value;
+        $distance = $data->response->route[0]->summary->distance;
         return $this->model->create($distance);
     }
 

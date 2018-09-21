@@ -4,13 +4,14 @@
 
 The project assumes docker and docker-compose have been installed on the local machine.
 
-The api makes use of google distance matrix api which makes use of an api key.
+The api makes use of HERE maps routing api which makes use of an app id and app code.
 
-The api key should be set before running the start.sh script.
+The app id and app code should be set before running the start.sh script.
 
-The api key is conained in ./api/config/config.php.
+The app id and app code are conained in ./api/config/config.php.
 
-The constant api_key should be set to your api key.
+The constant app_id should be set to your app id and the app_code should be set to your app code.
+
 
 After this the start.sh can be executed.
 

@@ -13,7 +13,7 @@ class Order extends Model
         $stmt = parent::get_conn()->prepare('INSERT INTO order_details (id,distance,status) VALUES (null,:distance,'.$status.')');
         $stmt->bindParam(':distance', $distance, \PDO::PARAM_STR);
         if($stmt->execute()){
-            return ['id'=>parent::get_conn()->lastInsertId(),'distance' => $distance, 'status' => $status];
+            return ['id'=>parent::get_conn()->lastInsertId(),'distance' => $distance, 'status' => 'UNASSIGN'];
         }
         return ['error'=>'ERROR_WHILE_CREATING_ORDER'];
         
