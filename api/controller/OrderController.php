@@ -13,7 +13,7 @@ class OrderController{
     }
 
     public function createOrder(array $origin,array $destination){
-        $api = file_get_contents("https://route.api.here.com/routing/7.2/calculateroute.json?app_id=".app_id."&app_code=".app_code."&waypoint0=geo!".$origin[0] . "," . $origin[1]."&waypoint1=geo!".$destination[0] . "," . $destination[1]."&mode=fastest;car;traffic:disabled");
+        $api = @file_get_contents("https://route.api.here.com/routing/7.2/calculateroute.json?app_id=".app_id."&app_code=".app_code."&waypoint0=geo!".$origin[0] . "," . $origin[1]."&waypoint1=geo!".$destination[0] . "," . $destination[1]."&mode=fastest;car;traffic:disabled");
         $data = json_decode($api);
 
         if(!isset($data->response->route)){

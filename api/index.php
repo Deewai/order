@@ -7,8 +7,8 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 
-// show error reporting for dev
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+// hide error reporting for prod
+ini_set('display_errors', 0);
+// error_reporting(E_ALL);
 include 'vendor/autoload.php';
 include __DIR__.'/config/routes.php';

@@ -1,8 +1,5 @@
 <?php
-// namespace tests\model;
 use PHPUnit\Framework\TestCase;
-// use GuzzleHttp\Psr7\Request;
-// use Psr\Http\Message\ResponseInterface;
 use App\controller\OrderController;
 use App\model\Model;
 class OrderControllerTest extends TestCase
@@ -25,7 +22,7 @@ class OrderControllerTest extends TestCase
     }
 
     public function testCreateOrder(){
-        $response = $this->order->createOrder(['40.6655101','15'],['20','11']);
+        $response = $this->order->createOrder(['49.950096','14.668544'],['50.031817','14.490880']);
         if(!key_exists('error',$response)){
             $this->assertArrayHasKey('id',$response);
             $this->assertArrayHasKey('distance',$response);
@@ -38,7 +35,7 @@ class OrderControllerTest extends TestCase
     }
 
     public function testTakeOrder(){
-        $response = $this->order->createOrder(['40.6655101','15'],['20','11']);
+        $response = $this->order->createOrder(['49.950096','14.668544'],['50.031817','14.490880']);
         $result = $this->order->takeOrder($response['id'],'taken');
         $order_response = 'INVALID_ORDER_STATUS';
         if(!key_exists('error',$response)){
@@ -61,7 +58,7 @@ class OrderControllerTest extends TestCase
     }
 
     public function testOrderList(){
-        $response = $this->order->createOrder(['40.6655101','15'],['20','11']);
+        $response = $this->order->createOrder(['49.950096','14.668544'],['50.031817','14.490880']);
         $result = $this->order->orderList(1,5);
         $this->assertTrue(is_array($result));
     }

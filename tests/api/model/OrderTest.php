@@ -1,8 +1,5 @@
 <?php
-// namespace tests\model;
 use PHPUnit\Framework\TestCase;
-// use GuzzleHttp\Psr7\Request;
-// use Psr\Http\Message\ResponseInterface;
 use App\model\Order;
 class OrderTest extends TestCase
 {
