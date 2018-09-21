@@ -1,0 +1,22 @@
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+
+CREATE DATABASE IF NOT EXISTS order_details;
+
+USE order_details;
+
+CREATE TABLE order_details (
+  id int(11) NOT NULL,
+  distance varchar(50) NOT NULL,
+  status tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+ALTER TABLE order_details
+  ADD PRIMARY KEY (id);
+
+ALTER TABLE order_details
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+COMMIT;
