@@ -1,6 +1,6 @@
 # order
 
-#usage
+# usage
 
 The project assumes docker and docker-compose have been installed on the local machine.
 
