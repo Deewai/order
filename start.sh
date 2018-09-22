@@ -3,7 +3,7 @@ chmod 777 -R ./
 >&2 echo "Building all containers...."
 docker-compose up -d;
 >&2 echo "Installing pdo_mysql...."
-docker exec php /bin/sh -c 'docker-php-ext-install mysqli pdo pdo_mysql';
+docker exec php /bin/sh -c 'docker-php-ext-install pdo pdo_mysql';
 >&2 echo "Restarting php container...."
 docker-compose stop php;
 docker-compose start php;
