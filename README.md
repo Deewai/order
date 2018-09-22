@@ -20,11 +20,11 @@ After a successful startup a message "Application running at port 8080...." shou
 
 # Solution
 
-The Solution makes use of 3 docker containers with a start.sh script to install and startup containers.
+The Solution makes use of 3 docker containers with a start.sh script is used to install and startup containers.
 
 A container for php, one for mysql and one for nginx all setup with docker-compose
 
-The rest api is contained in the api folder, the tests in the tests folder.
+The rest api is contained in the api folder, the tests in the tests folder which makes use of phpunit.
 
 ## The api
 
@@ -32,4 +32,4 @@ The api consists of a config folder where all configuration and routing is done 
 a controller folder a model folder and a vendor folder with an index.php entry point for the aplication
 
 ## The tests
-The test written takes the folder structure of the api for which contains the test for each class
+The test written takes the folder structure of the api
